@@ -14,11 +14,13 @@ Imagine querying from your mail client to your intranet data stored in a classic
  * no authentification for now
 
 ## What will never work
- * no equivalent for \>= and \<= d
+ * no equivalent for \>= and \<=
 
-## Install
+## Install and test
 
-    npm install ldapjs-elasticsearch
+    npm install .
+
+    npm test
 
 ## Licence
 
