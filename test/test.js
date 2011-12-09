@@ -3,16 +3,23 @@ var vows = require('vows'),
     ldap = require('ldapjs'),
     filter = require('../lib/elasticsearch.js').filter;
 
-vows.describe('Ldap').addBatch({
+var conversion = {
+    '(&(foo=bar)(zig=zag))':
+        {"bool":{"must":[{"term":{"zig":"zag"}},{"term":{"foo":"bar"}}]}},
+    '(&(|(givenname=pl*)(sn=pl*)(mail=pl*)(cn=pl*)))':
+        {"bool":{"must":[{"bool":{"should":[{"prefix":{"cn":"pl"}},{"prefix":{"mail":"pl"}},{"prefix":{"sn":"pl"}},{"prefix":{"givenname":"pl"}}]}}]}}
+};
 
-    'A ldap query': {
-        topic: '(&(foo=bar)(zig=zag))',
+var v = vows.describe('Ldap');
+Object.keys(conversion).forEach(function(key){
+    var batch = {};
+    batch[key] = {
+        topic: ldap.filters.parseString(key),
         'should be parsed': function(query) {
-            var f = ldap.filters.parseString(query);
-            assert.deepEqual(
-                {"bool":{"must":[{"term":{"zig":"zag"}},{"term":{"foo":"bar"}}]}},
-                filter(f));
-            //console.log(JSON.stringify(filter(f)));
+            //console.log(key, JSON.stringify(filter(query)));
+            assert.deepEqual(conversion[key], filter(query));
         }
-    }
-}).run();
+    };
+    v.addBatch(batch);
+});
+v.run();
