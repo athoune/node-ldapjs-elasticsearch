@@ -4,18 +4,20 @@ var vows = require('vows'),
     filter = require('../lib/elasticsearch.js').filter;
 
 var conversion = {
-    '(foo=bar)': {"term": {"foo": "bar"}},
+    '(foo=bar)': {'term': {'foo': 'bar'}},
     //'foo~=bar'
     //'(!foo=bar)': {},
     '(&(foo=bar)(zig=zag))':
-        {"bool":{"must":[{"term":{"zig":"zag"}},{"term":{"foo":"bar"}}]}},
+        {'bool': {'must': [{'term': {'zig': 'zag'}},{'term': {'foo': 'bar'}}]}},
     '(&(|(givenname=pl*)(sn=pl*)(mail=pl*)(cn=pl*)))':
-        {"bool":{"must":[{"bool":{"should":[{"prefix":{"cn":"pl"}},{"prefix":{"mail":"pl"}},{"prefix":{"sn":"pl"}},{"prefix":{"givenname":"pl"}}]}}]}}
+        {'bool': {'must': [{'bool': {'should': [
+            {'prefix': {'cn': 'pl'}},{'prefix': {'mail': 'pl'}},{'prefix':
+                            {'sn': 'pl'}},{'prefix': {'givenname': 'pl'}}]}}]}}
 
 };
 
 var v = vows.describe('Ldap');
-Object.keys(conversion).forEach(function(key){
+Object.keys(conversion).forEach(function(key) {
     var batch = {};
     batch[key] = {
         topic: ldap.filters.parseString(key),
