@@ -1,6 +1,6 @@
 {
     "name"        : "ldapjs-elasticsearch",
-    "version"     : "0.0.1",
+    "version"     : "0.0.2",
     "description" : "Search into your elastic search datas throught LDAP.",
     "author"      : "Mathieu Lecarme <mathieu@garambrogne.net>",
     "dependencies": {
