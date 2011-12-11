@@ -10,7 +10,6 @@ Imagine querying from your mail client to your intranet data stored in a classic
  * _or, and, equality, substr_ filters
 
 ## What you can't do
- * there is a bug with _not_
  * no authentification for now
 
 ## What will never work
