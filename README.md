@@ -22,6 +22,15 @@ Imagine querying from your mail client to your intranet data stored in a classic
 
     npm test
 
+## Example
+
+There is a simple example in the _example/addressbook_ folder.
+
+## Dependencies
+
+The example use [elastical](https://github.com/rgrove/node-elastical),
+but the query conversion is agnostic.
+
 ## Licence
 
 MIT.
