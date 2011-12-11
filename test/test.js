@@ -6,7 +6,7 @@ var vows = require('vows'),
 var conversion = {
     '(foo=bar)': {'term': {'foo': 'bar'}},
     //'foo~=bar'
-    //'(!foo=bar)': {},
+    '(!(foo=bar))': {'bool': {'must_not': {'term': {'foo': 'bar'}}}},
     '(&(foo=bar)(zig=zag))':
         {'bool': {'must': [{'term': {'zig': 'zag'}},{'term': {'foo': 'bar'}}]}},
     '(&(|(givenname=pl*)(sn=pl*)(mail=pl*)(cn=pl*)))':
